@@ -1,7 +1,12 @@
-export async function POST(req: Request) {
-  const { userId, accessToken } = await req.json();
+import { NextApiRequest, NextApiResponse } from "next";
 
-  const res = await fetch(
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const { userId, accessToken } = req.body;
+
+  const response = await fetch(
     `https://graph.microsoft.com/v1.0/users/${userId}/teamwork/sendActivityNotification`,
     {
       method: "POST",
@@ -13,7 +18,7 @@ export async function POST(req: Request) {
         topic: {
           source: "text",
           value: "Next.js MVP",
-          webUrl: process.env.REDIRECT_URI, // Click-д redirect болох URL
+          webUrl: "https://microsoft-app-test.vercel.app",
         },
         activityType: "customNotification",
         previewText: { content: "Шинэ мэдэгдэл ирлээ" },
@@ -21,8 +26,6 @@ export async function POST(req: Request) {
     }
   );
 
-  const data = await res.json();
-  return new Response(
-    JSON.stringify({ success: res.ok, status: res.status, response: data })
-  );
+  const data = await response.json();
+  res.status(response.status).json(data);
 }

@@ -1,27 +1,35 @@
-import { NextResponse } from "next/server";
+import { NextApiRequest, NextApiResponse } from "next";
 
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const code = searchParams.get("code");
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const code = req.query.code as string;
+  const redirectUri = process.env.REDIRECT_URI!;
+  const tenantId = process.env.TENANT_ID!;
+  const clientId = process.env.CLIENT_ID!;
+  const clientSecret = process.env.CLIENT_SECRET!;
+  const scope = "User.Read TeamsActivity.Send";
 
   const params = new URLSearchParams();
-  params.append("client_id", process.env.CLIENT_ID!);
-  params.append("scope", "User.Read TeamsActivity.Send");
-  params.append("code", code!);
-  params.append("redirect_uri", process.env.REDIRECT_URI!);
+  params.append("client_id", clientId);
+  params.append("scope", scope);
+  params.append("code", code);
+  params.append("redirect_uri", redirectUri);
   params.append("grant_type", "authorization_code");
-  params.append("client_secret", process.env.CLIENT_SECRET!);
+  params.append("client_secret", clientSecret);
 
-  const res = await fetch(
-    `https://login.microsoftonline.com/${process.env.TENANT_ID}/oauth2/v2.0/token`,
+  const tokenRes = await fetch(
+    `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`,
     {
       method: "POST",
       body: params,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
     }
   );
 
-  const data = await res.json();
+  const tokenData = await tokenRes.json();
 
-  // access_token = delegated token
-  return NextResponse.json(data);
+  // Save token in session / cookie or return
+  res.status(200).json({ access_token: tokenData.access_token });
 }

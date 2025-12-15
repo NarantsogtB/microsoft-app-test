@@ -18,15 +18,15 @@
   "accentColor": "#f25022",
   "developer": {
     "name": "Internal",
-    "websiteUrl": "https://localhost:3000",
-    "privacyUrl": "https://localhost:3000/privacy",
-    "termsOfUseUrl": "https://localhost:3000/terms"
+    "websiteUrl": "https://microsoft-app-test.vercel.app",
+    "privacyUrl": "https://microsoft-app-test.vercel.app/privacy",
+    "termsOfUseUrl": "https://microsoft-app-test.vercel.app/terms"
   },
   "staticTabs": [
     {
       "entityId": "home",
       "name": "Home",
-      "contentUrl": "https://localhost:3000",
+      "contentUrl": "https://microsoft-app-test.vercel.app",
       "scopes": ["personal"]
     }
   ],
