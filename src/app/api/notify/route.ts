@@ -17,7 +17,8 @@ export async function POST(req: NextRequest) {
           topic: {
             source: "text",
             value: "Next.js MVP",
-            webUrl: "https://microsoft-app-test.vercel.app",
+            webUrl:
+              "https://teams.microsoft.com/l/entity/88ec6318-97bc-41e0-9795-dce262bd1bc4/home?webUrl=https://microsoft-app-test.vercel.app",
           },
           activityType: "customNotification",
           previewText: { content: "Шинэ мэдэгдэл ирлээ" },
