@@ -1,0 +1,49 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.17/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.17",
+  "version": "1.0.0",
+  "id": "88ec6318-97bc-41e0-9795-dce262bd1bc4",
+  "name": {
+    "short": "Next MVP",
+    "full": "This is sales tracking notification bot"
+  },
+  "description": {
+    "short": "Next.js MVP App for internal use",
+    "full": "This is a minimal Teams app with custom notifications."
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "accentColor": "#f25022",
+  "developer": {
+    "name": "Internal",
+    "websiteUrl": "https://localhost:3000",
+    "privacyUrl": "https://localhost:3000/privacy",
+    "termsOfUseUrl": "https://localhost:3000/terms"
+  },
+  "staticTabs": [
+    {
+      "entityId": "home",
+      "name": "Home",
+      "contentUrl": "https://localhost:3000",
+      "scopes": ["personal"]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "88ec6318-97bc-41e0-9795-dce262bd1bc4",
+      "scopes": ["personal"]
+    }
+  ],
+  "activities": {
+    "activityTypes": [
+      {
+        "type": "customNotification",
+        "description": "Custom alert",
+        "templateText": "New notification: {{content}}"
+      }
+    ]
+  },
+  "permissions": ["identity"]
+}

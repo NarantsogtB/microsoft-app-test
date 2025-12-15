@@ -5,9 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "dev:https": "NODE_TLS_REJECT_UNAUTHORIZED=0 node server.js"
   },
   "dependencies": {
+    "jsonwebtoken": "^9.0.3",
     "next": "16.0.10",
     "react": "19.2.1",
     "react-dom": "19.2.1"
