@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   const { recipientUserId, accessToken } = await req.json();
 
-  const botId = "88ec6318-97bc-41e0-9795-dce262bd1bc4";
+  const botId = process.env.BOT_ID!;
   const appUrl = "https://microsoft-app-test.vercel.app";
 
   const response = await fetch(
