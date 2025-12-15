@@ -2,13 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get("code");
-  if (!code)
-    return NextResponse.json({ error: "No code provided" }, { status: 400 });
+  if (!code) return NextResponse.json({ error: "No code" }, { status: 400 });
 
-  const redirectUri = process.env.REDIRECT_URI!;
   const tenantId = process.env.TENANT_ID!;
   const clientId = process.env.CLIENT_ID!;
   const clientSecret = process.env.CLIENT_SECRET!;
+  const redirectUri = process.env.REDIRECT_URI!;
   const scope = "User.Read TeamsActivity.Send";
 
   const params = new URLSearchParams();
