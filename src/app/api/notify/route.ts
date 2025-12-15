@@ -9,6 +9,7 @@ export async function POST(req: NextRequest) {
     topic: {
       source: "entityUrl",
       webUrl: `https://teams.microsoft.com/l/entity/${botId}/home?webUrl=${appUrl}`,
+      value: `https://teams.microsoft.com/l/entity/${botId}/home?webUrl=${appUrl}`,
     },
     activityType: "customNotification",
     previewText: { content: "Шинэ мэдэгдэл ирлээ" },
