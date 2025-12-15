@@ -9,8 +9,9 @@ export async function POST(req: NextRequest) {
     // Graph API-д илгээх body
     const body = {
       topic: {
-        source: "user", // user руу notification
-        value: userId, // Graph resource path нь userId байх ёстой
+        source: "entityUrl",
+        value: `https://graph.microsoft.com/v1.0/users/${userId}`, // Graph resource path
+        webUrl: `https://teams.microsoft.com/l/entity/${botId}/home?webUrl=${appUrl}`, // deep link
       },
       activityType: "customNotification",
       previewText: {
