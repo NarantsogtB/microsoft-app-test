@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default function GET(req: NextApiRequest, res: NextApiResponse) {
   const redirectUri = process.env.REDIRECT_URI!;
   const tenantId = process.env.TENANT_ID!;
   const clientId = process.env.CLIENT_ID!;
