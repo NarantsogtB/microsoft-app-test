@@ -2,35 +2,32 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
-    const { userId, accessToken } = await req.json();
+    const { accessToken, teamId, channelId } = await req.json();
     const botId = process.env.BOT_ID!;
     const appUrl = "https://microsoft-app-test.vercel.app"; // өөрийн Vercel URL
 
-    // Graph API-д илгээх body
+    if (!accessToken || !teamId || !channelId) {
+      return NextResponse.json(
+        { error: "accessToken, teamId болон channelId хэрэгтэй" },
+        { status: 400 }
+      );
+    }
+
     const body = {
       topic: {
-        source: "entityUrl",
-        value: `https://graph.microsoft.com/v1.0/users/${userId}`, // Graph resource path
-        webUrl: `https://teams.microsoft.com/l/entity/${botId}/home?webUrl=${appUrl}`, // deep link
+        source: "channel", // Channel руу notification
+        value: `teams/${teamId}/channels/${channelId}`,
       },
       activityType: "customNotification",
-      previewText: {
-        content: "Шинэ мэдэгдэл ирлээ",
-      },
+      previewText: { content: "Шинэ мэдэгдэл ирлээ" },
       templateParameters: [
-        {
-          name: "customMessage",
-          value: "Энэ бол тест мэдэгдэл",
-        },
+        { name: "customMessage", value: "Энэ бол тест мэдэгдэл" },
       ],
-      // Optional: deep link
-      // Энэ линк user-д notification дээр дарахад очих URL
-      // linkUrl нь Bot ID болон app URL ашиглан Teams-д redirect хийнэ
-      linkUrl: `https://teams.microsoft.com/l/entity/${botId}/home?webUrl=${appUrl}`,
+      linkUrl: `https://teams.microsoft.com/l/entity/${botId}/home?webUrl=${appUrl}`, // Bot deep link
     };
 
     const response = await fetch(
-      `https://graph.microsoft.com/v1.0/users/${userId}/teamwork/sendActivityNotification`,
+      `https://graph.microsoft.com/v1.0/teams/${teamId}/channels/${channelId}/messages`,
       {
         method: "POST",
         headers: {

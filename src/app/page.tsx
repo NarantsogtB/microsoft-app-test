@@ -4,17 +4,18 @@ import { useState } from "react";
 
 export default function Home() {
   const [accessToken, setAccessToken] = useState("");
-  const [userId, setUserId] = useState("");
+  const [teamId, setTeamId] = useState("");
+  const [channelId, setChannelId] = useState("");
 
   const login = () => {
-    window.location.href = "/auth";
+    window.location.href = "/auth"; // Teams SSO login
   };
 
   const sendNotification = async () => {
     const res = await fetch("/api/notify", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId, accessToken }),
+      body: JSON.stringify({ teamId, channelId, accessToken }),
     });
     const data = await res.json();
     alert(JSON.stringify(data));
@@ -27,9 +28,15 @@ export default function Home() {
       <br />
       <br />
       <input
-        placeholder="User Object ID"
-        value={userId}
-        onChange={(e) => setUserId(e.target.value)}
+        placeholder="Team ID"
+        value={teamId}
+        onChange={(e) => setTeamId(e.target.value)}
+      />
+      <br />
+      <input
+        placeholder="Channel ID"
+        value={channelId}
+        onChange={(e) => setChannelId(e.target.value)}
       />
       <br />
       <input
