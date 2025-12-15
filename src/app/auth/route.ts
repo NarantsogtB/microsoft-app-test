@@ -1,14 +1,12 @@
-import { NextApiRequest, NextApiResponse } from "next";
+// app/auth/route.ts
+import { NextRequest, NextResponse } from "next/server";
 
-export default function GET(req: NextApiRequest, res: NextApiResponse) {
-  const redirectUri = process.env.REDIRECT_URI!;
-  const tenantId = process.env.TENANT_ID!;
-  const clientId = process.env.CLIENT_ID!;
-  const scope = "User.Read TeamsActivity.Send";
+export async function GET(req: NextRequest) {
+  // Your code here
+  return NextResponse.json({ message: "Hello GET" });
+}
 
-  const authUrl = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(
-    redirectUri
-  )}&response_mode=query&scope=${encodeURIComponent(scope)}&state=12345`;
-
-  res.status(200).json({ authUrl });
+export async function POST(req: NextRequest) {
+  const body = await req.json();
+  return NextResponse.json({ received: body });
 }
