@@ -9,7 +9,7 @@ export default function Home() {
   const [selectedChannel, setSelectedChannel] = useState<string>("");
   const [loading, setLoading] = useState(false);
 
-  // Teams + Channels татах
+  // Dev Mode: Token-г input box-оор оруулах
   const fetchTeams = async () => {
     if (!accessToken) return;
     setLoading(true);
@@ -25,7 +25,6 @@ export default function Home() {
     }
   };
 
-  // Notification явуулах
   const sendNotification = async () => {
     if (!selectedTeam || !selectedChannel) {
       alert("Team болон Channel сонгоно уу!");
@@ -53,19 +52,14 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (accessToken) {
-      fetchTeams();
-    }
+    if (accessToken) fetchTeams();
   }, [accessToken]);
 
   return (
     <main style={{ padding: 20 }}>
       <h1>Teams Notification Dev Mode</h1>
 
-      <p>
-        **Dev Mode:** Access token-г input box-д оруулж тест хийнэ. (Teams SDK
-        SSO-г энэ үед ашиглахгүй)
-      </p>
+      <p>**Dev Mode:** Access token-г input box-д оруулж тест хийнэ.</p>
 
       <input
         placeholder="Access Token-г оруулна уу"
