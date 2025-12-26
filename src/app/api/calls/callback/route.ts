@@ -28,7 +28,7 @@ function getGraphClient() {
 async function playAudio(callId: string) {
   const graphClient = getGraphClient();
 
-  const audioUrl = `${process.env.DEPLOYED_URL}/audio/voice-message.wav`;
+  const audioUrl = `${process.env.DEPLOYED_URL}/audio/voice-message-teams.wav`;
 
   const payload = {
     prompts: [
@@ -49,7 +49,17 @@ async function playAudio(callId: string) {
     .api(`/communications/calls/${callId}/playPrompt`)
     .post(payload);
 }
-
+export async function GET(req: NextRequest) {
+  const validationToken = req.nextUrl.searchParams.get("validationToken");
+  if (validationToken) {
+    console.log("✅ Webhook validation token received");
+    return new NextResponse(validationToken, {
+      status: 200,
+      headers: { "Content-Type": "text/plain" },
+    });
+  }
+  return new NextResponse("Method GET not allowed", { status: 405 });
+}
 // =========================
 // Callback handler
 // =========================
