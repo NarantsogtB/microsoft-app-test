@@ -9,6 +9,8 @@
     "dev:https": "NODE_TLS_REJECT_UNAUTHORIZED=0 node server.js"
   },
   "dependencies": {
+    "@azure/identity": "^4.13.0",
+    "@microsoft/microsoft-graph-client": "^3.0.7",
     "@microsoft/teams-js": "^2.47.2",
     "jsonwebtoken": "^9.0.3",
     "next": "16.0.10",
