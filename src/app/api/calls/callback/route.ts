@@ -28,9 +28,9 @@ function getGraphClient() {
 async function playAudio(callId: string) {
   const client = getGraphClient();
 
-  const audioUrl =
-    "https://www.dropbox.com/scl/fi/3tqkvnr912ufvlthnpl6c/voice-message-teams.wav?rlkey=fd0onkzpmdwvfpwkjv7qhd13o&st=uow0ghzb&dl=1";
-
+  const dropBoxUrl =
+    "https://www.dropbox.com/scl/fi/3tqkvnr912ufvlthnpl6c/voice-message-teams.wav?rlkey=fd0onkzpmdwvfpwkjv7qhd13o&st=uow0ghzb&dl=0";
+  const audioUrl = `https://microsoft-app-test.vercel.app/api/audio-proxy?file=${dropBoxUrl};`;
   const payload = {
     prompts: [
       {
@@ -44,6 +44,7 @@ async function playAudio(callId: string) {
     ],
     clientContext: `ctx_${Date.now()}`,
   };
+  console.log("aurdio url: ", audioUrl);
 
   console.log(`🔊 Playing audio for call ${callId}`);
   return client.api(`/communications/calls/${callId}/playPrompt`).post(payload);
