@@ -109,12 +109,9 @@ export async function POST(req: NextRequest) {
     if (Array.isArray(body?.value)) {
       for (const notification of body.value) {
         const resourceData = notification?.resourceData;
-        const callId = resourceData?.id;
+        const resource = notification?.resource;
+        const callId = resource?.split("/").pop();
         const state = resourceData?.state;
-        console.log("resourceData: ", resourceData);
-        console.log("callId: ", callId);
-        console.log("state: ", state);
-        console.log("notification: ", notification);
 
         // 1. Incoming: Дуудлага ирэхэд ХАРИУЛАХ
         if (state === "incoming" && callId) {
