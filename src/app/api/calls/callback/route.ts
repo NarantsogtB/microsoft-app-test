@@ -28,7 +28,7 @@ function getGraphClient() {
 async function playAudio(callId: string) {
   const graphClient = getGraphClient();
 
-  const audioUrl = `${process.env.DEPLOYED_URL}/audio/voice-message-teams.wav`;
+  const audioUrl = `https://microsoft-app-test.vercel.app/audio/voice-message-teams.wav`;
 
   const payload = {
     prompts: [
@@ -85,7 +85,6 @@ export async function POST(req: NextRequest) {
 
         console.log(`[Call ${callId}] state = ${state}`);
 
-        // 🎯 ЯГ ЭНД AUDIO PLAY
         if (state === "established" && callId) {
           await playAudio(callId);
         }
