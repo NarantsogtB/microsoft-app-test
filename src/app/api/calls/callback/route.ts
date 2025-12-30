@@ -111,6 +111,9 @@ export async function POST(req: NextRequest) {
         const resourceData = notification?.resourceData;
         const callId = resourceData?.id;
         const state = resourceData?.state;
+        console.log("resourceData: ", resourceData);
+        console.log("callId: ", callId);
+        console.log("state: ", state);
 
         // 1. Incoming: Дуудлага ирэхэд ХАРИУЛАХ
         if (state === "incoming" && callId) {
