@@ -120,13 +120,24 @@ export async function POST(req: NextRequest) {
 
         // 2. Established: Холбогдсон даруйд АУДИО ТОГЛУУЛАХ
         if (state === "established" && callId) {
-          console.log("🎯 Established. Waiting 1s before audio...");
+          console.log("🎯 Call Established. Triggering PlayPrompt...");
 
-          // Serverless дээр setTimeout оронд Promise ашиглана
-          await new Promise((resolve) => setTimeout(resolve, 1500));
+          // Microsoft-д медиа сувгаа бэлдэх хугацаа өгөх (2 секунд)
+          await new Promise((resolve) => setTimeout(resolve, 2000));
 
-          await playAudio(callId);
-          console.log("✅ PlayPrompt command sent.");
+          try {
+            const playResult = await playAudio(callId);
+            console.log(
+              "✅ PlayPrompt request accepted by Microsoft:",
+              playResult.id
+            );
+          } catch (err: any) {
+            // Энд ямар алдаа гарч байгааг заавал харах хэрэгтэй
+            console.error(
+              "❌ PlayPrompt Failed Error Body:",
+              JSON.stringify(err.body || err, null, 2)
+            );
+          }
         }
 
         if (state === "terminated") {
