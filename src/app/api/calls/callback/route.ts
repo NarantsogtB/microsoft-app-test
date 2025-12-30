@@ -29,7 +29,7 @@ async function playAudio(callId: string) {
   const client = getGraphClient();
 
   const audioUrl =
-    "https://microsoft-app-test.vercel.app/audio/voice-message-teams.wav";
+    "https://www.dropbox.com/scl/fi/3tqkvnr912ufvlthnpl6c/voice-message-teams.wav?rlkey=fd0onkzpmdwvfpwkjv7qhd13o&st=uow0ghzb&dl=0";
 
   const payload = {
     prompts: [
