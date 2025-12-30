@@ -29,7 +29,7 @@ async function playAudio(callId: string) {
   const client = getGraphClient();
 
   const audioUrl =
-    "https://www.dropbox.com/scl/fi/3tqkvnr912ufvlthnpl6c/voice-message-teams.wav?rlkey=fd0onkzpmdwvfpwkjv7qhd13o&st=uow0ghzb&dl=0";
+    "https://www.dropbox.com/scl/fi/3tqkvnr912ufvlthnpl6c/voice-message-teams.wav?rlkey=fd0onkzpmdwvfpwkjv7qhd13o&st=uow0ghzb&dl=1";
 
   const payload = {
     prompts: [
